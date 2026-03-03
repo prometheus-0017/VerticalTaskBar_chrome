@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      chrome-types:
+        specifier: ^0.1.420
+        version: 0.1.420
       vue:
         specifier: ^3.5.25
         version: 3.5.29(typescript@5.9.3)
@@ -453,6 +456,9 @@ packages:
   cheerio@1.2.0:
     resolution: {integrity: sha512-WDrybc/gKFpTYQutKIK6UvfcuxijIZfMfXaYm8NMsPQxSYvf+13fXUJ4rztGGbJcBQ/GF55gvrZ0Bc0bj/mqvg==}
     engines: {node: '>=20.18.1'}
+
+  chrome-types@0.1.420:
+    resolution: {integrity: sha512-7tMfTdMzk4j7CrICU0+Vzxf9o65u4b7hhc2FPfZ3aC4fiDPZ9QpPO4XqQZBY87vtKIStlJGBWf2O2KoLmof/2g==}
 
   convert-source-map@1.9.0:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
@@ -1097,6 +1103,8 @@ snapshots:
       parse5-parser-stream: 7.1.2
       undici: 7.22.0
       whatwg-mimetype: 4.0.0
+
+  chrome-types@0.1.420: {}
 
   convert-source-map@1.9.0: {}
 
