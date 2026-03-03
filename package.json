@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/chrome": "^0.1.37",
     "chrome-types": "^0.1.420",
     "vue": "^3.5.25"
   },
