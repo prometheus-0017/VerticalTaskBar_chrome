@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  xuri-rpc: link:../../xuri-rpc
+
 importers:
 
   .:
@@ -18,8 +21,8 @@ importers:
         specifier: ^3.5.25
         version: 3.5.29(typescript@5.9.3)
       xuri-rpc:
-        specifier: ^1.0.10
-        version: 1.0.10
+        specifier: link:../../xuri-rpc
+        version: link:../../xuri-rpc
     devDependencies:
       '@crxjs/vite-plugin':
         specifier: 2.0.0-beta.33
@@ -781,9 +784,6 @@ packages:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
     engines: {node: '>=18'}
 
-  xuri-rpc@1.0.10:
-    resolution: {integrity: sha512-TKywNSYJdZgLy0JUEe+lT/bVacu3YM4QKJZ48PYuDE+pm7FVt7ftHMRwk1LMHqm3pw8KdqSvHAYCZvRPNuvcnw==}
-
 snapshots:
 
   '@babel/helper-string-parser@7.27.1': {}
@@ -1437,5 +1437,3 @@ snapshots:
       iconv-lite: 0.6.3
 
   whatwg-mimetype@4.0.0: {}
-
-  xuri-rpc@1.0.10: {}

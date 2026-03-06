@@ -1,11 +1,19 @@
+import { getWindowsManager } from './WindowsManager';
 console.log('hlllo')
+
+
+// Initialize WindowsManager
+let windowsManager: any;
+//尤其注意不要在全局上执行初始化逻辑。
+async function init(){
+  windowsManager = await getWindowsManager();
+}
+
+chrome.tabs.onCreated.addListener((tab) => {
+  console.log('new tab', tab)
+})
+
 chrome.runtime.onInstalled.addListener(() => {
   console.log("服务已启动，正在连接外部控制源...");
-  
-  // 选择一种模式启动
-  startPolling(); 
-  // startWebSocket(); // 如果需要实时性，取消注释并配置服务器
+  init();
 });
-
-
-

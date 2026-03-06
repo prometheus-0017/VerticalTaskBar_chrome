@@ -7,5 +7,8 @@ import manifest from "./manifest.json";
 
 // https://vite.dev/config/
 export default defineConfig({
+  server:{
+    port:5231
+  },
   plugins: [vue(),crx({manifest})],
 })
