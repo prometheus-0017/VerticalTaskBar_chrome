@@ -1,3 +1,30 @@
+/**
+你在写一个chrome 插件
+编写一个WindowsManager，用于管理tab变更，hook所有的tab变更事件，对应生成一个变更通知事项，内容参考：
+WindowChangeInfo(
+        type='delete',
+        data=WindowProxyDTO(
+            processId=v.getProcess(),
+            id=v.getId(),
+            pwd=v.getPwd(),
+            system='win',
+            originalName=v.getTitle(),
+            modifiedName=v.getTitle(),
+            processName=v.getProcessFileName(),
+            originalIcon=v.getIconPath(),
+            modifiedIcon=v.getIconPath()
+        ) 
+这个事项通过await rpc.notify(info)发送
+
+实现一个setTop(id) 方法，将当前窗口置顶，然后将id对应的tab置顶
+这里的id是tab的id
+
+另外实现一个随机uuid方法
+
+实现一个sync 方法，返回全部的tab信息，格式为WindowProxyDTO[]
+
+        
+ */
 // WindowProxyDTO interface
 interface WindowProxyDTO {
   processId: string;
