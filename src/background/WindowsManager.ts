@@ -248,9 +248,10 @@ interface Rpc{
   echo():Promise<void>;
 }
 let rpc:Rpc|null=null
+import ReconnectingWebSocket from 'reconnecting-websocket';
 
 async function  getSenderForDebug(client:Client) {
-  let socket=new WebSocket('ws://localhost:18765')
+  let socket=new ReconnectingWebSocket('ws://localhost:18765')
   socket.onmessage=async (e)=>{ 
     await getMessageReceiver().onReceiveMessage(JSON.parse(e.data),client)
   }

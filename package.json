@@ -11,6 +11,7 @@
   "dependencies": {
     "@types/chrome": "^0.1.37",
     "chrome-types": "^0.1.420",
+    "reconnect-ws": "^0.1.0",
     "vue": "^3.5.25",
     "xuri-rpc": "^1.0.10"
   },
