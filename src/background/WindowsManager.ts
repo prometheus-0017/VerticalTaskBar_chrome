@@ -298,22 +298,25 @@ export async function getWindowsManager(){
 //nmd 之前没有js当服务方的例子，这个await是不是不对啊
   windowsManager=new WindowsManager(rpc!)
 
-  await rpc!.loginChrome(asProxy({
-    sync:async ()=>{
-      debugger
-      let res=await windowsManager!.sync()
-      console.log('ppr',res)
-      return res
-    },
-    getHost:async ()=>{ 
-      let res=await windowsManager?.getHost()
-      console.log('res',res)
-      return res
+  const login=async ()=>{
+    await rpc!.loginChrome(asProxy({
+      sync:async ()=>{
+        let res=await windowsManager!.sync()
+        return res
+      },
+      getHost:async ()=>{ 
+        let res=await windowsManager?.getHost()
+        return res
+      },
+      toTop:windowsManager!.toTop,
+    }))
+  }
 
-    },
-    toTop:windowsManager.toTop,
-  }))
-  setInterval(async ()=>{console.log('hhhh');await rpc!.echo()},1500)
+  await login()
+
+  setInterval(async ()=>{
+    await login()
+  },1500)
 
   return windowsManager
 }
