@@ -143,7 +143,7 @@ class WindowsManager {
    */
   private async sendNotification(info: WindowChangeInfo) {
     try {
-      await this.rpc.notify(info);
+      await this.rpc.notify([info]);
     } catch (error) {
       console.error('Failed to send notification:', error);
     }
@@ -221,8 +221,27 @@ import { WebSocketConnectionKeeper,WebSocketSender } from 'xuri-rpc'
 
 // setDebugFlag(true)
 
-let hostId='taskbar-chrome-'+generateUUID()
-setHostId(hostId)
+async function initializeHostId(): Promise<string> {
+  if(hostId!=''){
+    return hostId
+  }
+  // Try to read from persistent storage first
+  const result = await chrome.storage.local.get('hostId');
+  
+  if (result.hostId && typeof result.hostId === 'string') {
+    // Use existing hostId from storage
+    console.log('[v] Loaded existing hostId from storage');
+    return result.hostId;
+  } else {
+    // Generate new hostId and save to storage
+    const newHostId = 'taskbar-chrome-' + generateUUID();
+    await chrome.storage.local.set({ hostId: newHostId });
+    console.log('[v] Generated and saved new hostId');
+    return newHostId;
+  }
+}
+
+let hostId = ""
 
 let client=new Client()
 //这么写是不合适的，但是我不确定meta机制是否完善
@@ -243,7 +262,7 @@ class SenderDecorator implements ISender{
 let sender:ISender|null=null
 
 interface Rpc{
-  notify: (info: WindowChangeInfo) => Promise<void>;
+  notify: (info: WindowChangeInfo[]) => Promise<void>;
   loginChrome(chromeProxy:any|WindowsManager):Promise<void>;
   echo():Promise<void>;
 }
@@ -271,6 +290,10 @@ async function  getSenderForDebug(client:Client) {
   
 }
 export async function prepareRpc(){
+  hostId=await initializeHostId()
+  setHostId(hostId)
+
+
   // sender=new WebSocketSender(new WebSocketConnectionKeeper('localhost'||window.location.hostname,18765,'/',client))
   sender=await getSenderForDebug(client)//没绷住 是wait时序问题吗
   sender=new SenderDecorator(sender)
