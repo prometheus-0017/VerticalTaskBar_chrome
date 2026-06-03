@@ -40,7 +40,7 @@ interface WindowProxyDTO {
 
 // WindowChangeInfo interface
 interface WindowChangeInfo {
-  type: 'add' | 'delete' | 'update' | 'activate';
+  type: 'add' | 'delete' | 'change' | 'activate';
   data: WindowProxyDTO;
 }
  /**
@@ -103,7 +103,7 @@ class WindowsManager {
         this.tabs.set(tabId, updatedWindowProxy);
         
         this.sendNotification({
-          type: 'update',
+          type: 'change',
           data: updatedWindowProxy
         });
       }
